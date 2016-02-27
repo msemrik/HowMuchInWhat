@@ -1,0 +1,41 @@
+group 'org.mati.semrik'
+version '1.0'
+
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    baseName = 'Report'
+    version = '0.1.0'
+    manifest {
+        attributes('Main-Class': '')
+    }
+    /*dependsOn configurations.runtime
+    from {
+        (configurations.runtime - configurations.provided).collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }*/
+}
+/*
+configurations {
+    provided
+    compile.extendsFrom provided
+}
+*/
+dependencies {
+    compile('joda-time:joda-time:2.3')
+    compile('org.apache.logging.log4j:log4j-api:2.5')
+    compile('org.apache.logging.log4j:log4j-core:2.5')
+    compile project(':Business')
+}
+
+task copyToLib(type: Copy) {
+    into "$buildDir/libs"
+    from configurations.runtime
+}
+copyToLib.dependsOn(build)
+

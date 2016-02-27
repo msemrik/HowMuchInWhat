@@ -1,2 +1,5 @@
 rootProject.name = 'HowMuchInWhat'
+include 'AccountingSystem','Business'
+include 'Business'
+include 'Report'
 
