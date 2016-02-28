@@ -11,9 +11,9 @@ import java.util.List;
 public interface AccountSadderDAOInterface {
     AccountSadder getAccountSadderById(long id) throws CoreException;
 
-    Long getAccountSadderForAccount(Account account) throws CoreException;
+    Double getAccountSadderForAccount(Account account) throws CoreException;
 
-    long getAccountSadderForAccountByDate(Account account, Date date) throws CoreException;
+    Double getAccountSadderForAccountByDate(Account account, Date date) throws CoreException;
 
     List<MonthlyAccountSadder> getAccountSadderMonthlyHistoryForAccount(Account account) throws CoreException;
 

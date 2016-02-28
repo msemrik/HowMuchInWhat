@@ -1,13 +1,11 @@
 package Business.domainObjects.DBObjects;
 
-import Business.Exceptions.CoreException;
 import Business.ObjectMediators.AccountSadderMediator;
 import Business.domainObjects.MovementStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.persistence.*;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,10 +28,12 @@ public class Movement implements DBObject {
     @ManyToOne
     private Account destAccount;
 
-    private Long amount;
+    private Double amount;
 
     @ManyToOne
     private Currency currency;
+
+    private Double currencyCotization;
 
     private Date movementDate;
 
@@ -47,13 +47,14 @@ public class Movement implements DBObject {
     public Movement() {
     }
 
-    public Movement(Account origAccount, Account destAccount, Long amount, Date movementDate, Detail detail, Currency currency, String commentary) {
+    public Movement(Account origAccount, Account destAccount, Double amount, Date movementDate, Detail detail, Currency currency, Double currencyCotization, String commentary) {
         this.origAccount = origAccount;
         this.destAccount = destAccount;
         this.amount = amount;
         this.movementDate = movementDate;
         this.detail = detail;
         this.currency = currency;
+        this.currencyCotization = currencyCotization;
         this.commentary = commentary;
         this.status = MovementStatus.EXECUTED;
     }
@@ -82,11 +83,11 @@ public class Movement implements DBObject {
         this.destAccount = destAccount;
     }
 
-    public Long getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
@@ -130,8 +131,16 @@ public class Movement implements DBObject {
         this.status = status;
     }
 
-    public String toPrint(){
+    public String toPrint() {
         return id + "(Date: " + movementDate + ", origAccount: " + origAccount.toPrint() + ", destAccount: " + destAccount.toPrint() + ") ";
+    }
+
+    public Double getCurrencyCotization() {
+        return currencyCotization;
+    }
+
+    public void setCurrencyCotization(Double currencyCotization) {
+        this.currencyCotization = currencyCotization;
     }
 
     @Override
@@ -139,19 +148,25 @@ public class Movement implements DBObject {
         DateFormat df2 = new SimpleDateFormat("MM/dd/yyyy HH:mm");
         String formattedDate = df2.format(movementDate.getTime());
         try {
-            return "Movement{" +
+            String returnString = "Movement{" +
                     "id=" + id +
                     ", origAccount=" + origAccount.getName() +
                     ", origAccountSadder=" + origAccount.getCurrency().getSymbol() + AccountSadderMediator.getAccountSadderForAccount(origAccount) +
                     ", destAccount=" + destAccount.getName() +
                     ", destAccountSadder=" + destAccount.getCurrency().getSymbol() + AccountSadderMediator.getAccountSadderForAccount(destAccount) +
-                    ", amount=" + currency.getSymbol() + amount +
-                    ", movementDate=" + formattedDate +
+                    ", amount=" + currency.getSymbol() + amount;
+
+            if (currencyCotization != null)
+                returnString = returnString + ", currencyCotization='" + currencyCotization + '\'';
+
+            returnString = returnString + ", movementDate=" + formattedDate +
                     ", detail=" + detail.getName() +
                     ", category=" + detail.getCategory().getName() +
                     ", commentary='" + commentary + '\'' +
                     ", status=" + status +
                     '}';
+
+            return returnString;
         } catch (Exception e) {
             logger.error("Error transforming Movement to String. Returning null");
             return "";

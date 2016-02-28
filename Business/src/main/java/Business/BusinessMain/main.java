@@ -1,6 +1,12 @@
 package Business.BusinessMain;
 
+import Business.Helpers.AccountHelper;
 import Business.Helpers.DateHelper;
+import Business.ObjectMediators.AccountMediator;
+import Business.ObjectMediators.CategoryMediator;
+import Business.ObjectMediators.CurrencyMediator;
+import Business.ObjectMediators.DetailMediator;
+import Business.domainObjects.DBObjects.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,11 +18,6 @@ public class main {
 
 
     public static void main(String[] args) throws Exception {
-/*
-        Date date1 = new Date();
-        date1.setHours(date1.getHours()-1);
-        //Thread.sleep(1000);
-        System.out.println(DateHelper.getDetailedDifference(date1));
 
         Currency peso;
         Currency dolar;
@@ -32,84 +33,6 @@ public class main {
 
         System.out.println(peso);
         System.out.println(dolar);
-
-
-        BankAccount bankAccount1;
-        BankAccount bankAccount2;
-        BankAccount bankAccount3;
-        BankAccount bankAccount4;
-        BankAccount bankAccount5;
-        BankAccount bankAccount6;
-        BankAccount bankAccount7;
-        try {
-            bankAccount1 = new BankAccount("Cordoba Debito", peso, "Debito", new Date("11/17/2015"), null, "Banco de Córdoba", "11110002223334445566");
-            bankAccount2 = new BankAccount("Frances Debito", peso, "Debito", new Date("11/17/2015"), null, "Banco Frances", "11110002223334445566");
-            bankAccount3 = new BankAccount("Frances Credito", peso, "Credito", new Date("11/17/2015"), null, "Banco Frances", "11110002223334445566");
-            bankAccount4 = new BankAccount("Santander Debito", peso, "Debito", new Date("11/17/2015"), null, "Santander Rio", "11110002223334445566");
-            bankAccount5 = new BankAccount("Santander Debito", dolar, "Debito", new Date("11/17/2015"), null, "Santander Rio", "11110002223334445566");
-            bankAccount6 = new BankAccount("Santander Credito Visa", peso, "Credito", new Date("11/17/2015"), null, "Santander Rio", "11110002223334445566");
-            bankAccount7 = new BankAccount("Santander Credito Amex", peso, "Credito", new Date("11/17/2015"), null, "Santander Rio", "11110002223334445566");
-
-            AccountHelper.saveAccount(bankAccount1);
-            AccountHelper.saveAccount(bankAccount2);
-            AccountHelper.saveAccount(bankAccount3);
-            AccountHelper.saveAccount(bankAccount4);
-            AccountHelper.saveAccount(bankAccount5);
-            AccountHelper.saveAccount(bankAccount6);
-            AccountHelper.saveAccount(bankAccount7);
-        } catch (Exception e) {
-            bankAccount1 = (BankAccount) AccountMediator.getAccountById(Long.parseLong("1"));
-            bankAccount2 = (BankAccount) AccountMediator.getAccountById(Long.parseLong("2"));
-            bankAccount3 = (BankAccount) AccountMediator.getAccountById(Long.parseLong("3"));
-            bankAccount4 = (BankAccount) AccountMediator.getAccountById(Long.parseLong("4"));
-            bankAccount5 = (BankAccount) AccountMediator.getAccountById(Long.parseLong("5"));
-            bankAccount6 = (BankAccount) AccountMediator.getAccountById(Long.parseLong("6"));
-            bankAccount7 = (BankAccount) AccountMediator.getAccountById(Long.parseLong("7"));
-
-
-        }
-
-        System.out.println(bankAccount1);
-        System.out.println(bankAccount2);
-        System.out.println(bankAccount3);
-        System.out.println(bankAccount4);
-        System.out.println(bankAccount5);
-        System.out.println(bankAccount6);
-        System.out.println(bankAccount7);
-
-
-        Person person1;
-        Person person2;
-
-        try {
-            person1 = new Person("Osvaldo Samuel Semrik", dolar,  new Date("11/17/2015"), null, "3513313182");
-            person2 = new Person("Matìas Semrik", peso,  new Date("11/17/2015"), null, "3513313182");
-            AccountHelper.saveAccount(person1);
-            AccountHelper.saveAccount(person2);
-        } catch (Exception e) {
-            person1 = (Person) AccountMediator.getAccountById(Long.parseLong("8"));
-            person2 = (Person) AccountMediator.getAccountById(Long.parseLong("9"));
-        }
-
-        System.out.println(person1);
-        System.out.println(person2);
-
-
-        Account incomeAccount;
-        Account outcomeAccount;
-
-        try {
-            incomeAccount = new Account("Incomes", peso,  new Date("11/17/2015"), null);
-            outcomeAccount = new Account("Outcomes", peso,  new Date("11/17/2015"), null);
-            AccountHelper.saveAccount(incomeAccount);
-            AccountHelper.saveAccount(outcomeAccount);
-        } catch (Exception e) {
-            incomeAccount = AccountMediator.getAccountById(Long.parseLong("10"));
-            outcomeAccount = AccountMediator.getAccountById(Long.parseLong("11"));
-        }
-
-        System.out.println(incomeAccount);
-        System.out.println(outcomeAccount);
 
 
         Category category;
@@ -215,14 +138,14 @@ public class main {
             detail7 = DetailMediator.getDetailById(7);
             detail8 = DetailMediator.getDetailById(8);
             detail9 = DetailMediator.getDetailById(9);
-            detail10 =DetailMediator.getDetailById(10);
-            detail11 =DetailMediator.getDetailById(11);
-            detail12 =DetailMediator.getDetailById(12);
-            detail13 =DetailMediator.getDetailById(13);
-            detail14 =DetailMediator.getDetailById(14);
-            detail15 =DetailMediator.getDetailById(15);
-            detail16 =DetailMediator.getDetailById(16);
-            detail17 =DetailMediator.getDetailById(17);
+            detail10 = DetailMediator.getDetailById(10);
+            detail11 = DetailMediator.getDetailById(11);
+            detail12 = DetailMediator.getDetailById(12);
+            detail13 = DetailMediator.getDetailById(13);
+            detail14 = DetailMediator.getDetailById(14);
+            detail15 = DetailMediator.getDetailById(15);
+            detail16 = DetailMediator.getDetailById(16);
+            detail17 = DetailMediator.getDetailById(17);
 
         }
 
@@ -243,8 +166,87 @@ public class main {
         System.out.println(detail15);
         System.out.println(detail16);
         System.out.println(detail17);
-*/
+
+
+        BankAccount bankAccount1;
+        BankAccount bankAccount2;
+        BankAccount bankAccount3;
+        BankAccount bankAccount4;
+        BankAccount bankAccount5;
+        BankAccount bankAccount6;
+        BankAccount bankAccount7;
+        try {
+            bankAccount1 = new BankAccount("Cordoba Debito", peso, "Debito", new Date("11/17/2015"), null, "Banco de Córdoba", "11110002223334445566");
+            bankAccount2 = new BankAccount("Frances Debito", peso, "Debito", new Date("11/17/2015"), null, "Banco Frances", "11110002223334445566");
+            bankAccount3 = new BankAccount("Frances Credito", peso, "Credito", new Date("11/17/2015"), null, "Banco Frances", "11110002223334445566");
+            bankAccount4 = new BankAccount("Santander Debito", peso, "Debito", new Date("11/17/2015"), null, "Santander Rio", "11110002223334445566");
+            bankAccount5 = new BankAccount("Santander Debito", dolar, "Debito", new Date("11/17/2015"), null, "Santander Rio", "11110002223334445566");
+            bankAccount6 = new BankAccount("Santander Credito Visa", peso, "Credito", new Date("11/17/2015"), null, "Santander Rio", "11110002223334445566");
+            bankAccount7 = new BankAccount("Santander Credito Amex", peso, "Credito", new Date("11/17/2015"), null, "Santander Rio", "11110002223334445566");
+
+            AccountHelper.saveAccount(bankAccount1);
+            AccountHelper.saveAccount(bankAccount2);
+            AccountHelper.saveAccount(bankAccount3);
+            AccountHelper.saveAccount(bankAccount4);
+            AccountHelper.saveAccount(bankAccount5);
+            AccountHelper.saveAccount(bankAccount6);
+            AccountHelper.saveAccount(bankAccount7);
+        } catch (Exception e) {
+            bankAccount1 = (BankAccount) AccountMediator.getAccountById(Long.parseLong("1"));
+            bankAccount2 = (BankAccount) AccountMediator.getAccountById(Long.parseLong("2"));
+            bankAccount3 = (BankAccount) AccountMediator.getAccountById(Long.parseLong("3"));
+            bankAccount4 = (BankAccount) AccountMediator.getAccountById(Long.parseLong("4"));
+            bankAccount5 = (BankAccount) AccountMediator.getAccountById(Long.parseLong("5"));
+            bankAccount6 = (BankAccount) AccountMediator.getAccountById(Long.parseLong("6"));
+            bankAccount7 = (BankAccount) AccountMediator.getAccountById(Long.parseLong("7"));
+
+
+        }
+
+        System.out.println(bankAccount1);
+        System.out.println(bankAccount2);
+        System.out.println(bankAccount3);
+        System.out.println(bankAccount4);
+        System.out.println(bankAccount5);
+        System.out.println(bankAccount6);
+        System.out.println(bankAccount7);
+
+
+        Person person1;
+        Person person2;
+
+        try {
+            person1 = new Person("Osvaldo Samuel Semrik", dolar, new Date("11/17/2015"), null, "3513313182");
+            person2 = new Person("Matìas Semrik", peso, new Date("11/17/2015"), null, "3513313182");
+            AccountHelper.saveAccount(person1);
+            AccountHelper.saveAccount(person2);
+        } catch (Exception e) {
+            person1 = (Person) AccountMediator.getAccountById(Long.parseLong("8"));
+            person2 = (Person) AccountMediator.getAccountById(Long.parseLong("9"));
+        }
+
+        System.out.println(person1);
+        System.out.println(person2);
+
+
+        Account incomeAccount;
+        Account outcomeAccount;
+
+        try {
+            incomeAccount = new Account("Incomes", peso, new Date("11/17/2015"), null);
+            outcomeAccount = new Account("Outcomes", peso, new Date("11/17/2015"), null);
+            AccountHelper.saveAccount(incomeAccount);
+            AccountHelper.saveAccount(outcomeAccount);
+        } catch (Exception e) {
+            incomeAccount = AccountMediator.getAccountById(Long.parseLong("10"));
+            outcomeAccount = AccountMediator.getAccountById(Long.parseLong("11"));
+        }
+
+        System.out.println(incomeAccount);
+        System.out.println(outcomeAccount);
     }
+
+
 
     public static void maina(String[] args) throws Exception {
 /*
@@ -323,6 +325,19 @@ public class main {
         }
         else throw new CoreException("It's a new movement.");
 */
+
+          /*
+        Currency dolar = CurrencyMediator.getCurrencyById(2);
+        BankAccount bankAccount1 = new BankAccount("BANCO EN DOLARES", dolar, "Debito", new Date("11/17/2015"), null, "BANCO YANKEE", "11110002223334445566");
+        AccountHelper.saveAccount(bankAccount1);
+        */
+        /*
+        Date date1 = new Date();
+        date1.setHours(date1.getHours()-1);
+        //Thread.sleep(1000);
+        System.out.println(DateHelper.getDetailedDifference(date1));
+*/
+
 
     }
 

@@ -13,6 +13,8 @@ public interface MovementDAOInterface {
 
     void deleteMovement(Movement movement, List<AccountSadder> accountSadderList) throws CoreException;
 
+    void deleteMovement(Movement movement, List<AccountSadder> accountSaddersToDelete, List<AccountSadder> accountOrigSadderToUpdate, List<AccountSadder> accountDestSadderToUpdate) throws CoreException;
+
     void saveMovement(Movement movement, AccountSadder origAccountSadder, AccountSadder destAccountSadder) throws CoreException;
 
     void saveMovement(Movement movement, List<AccountSadder> origAccountSadders, List<AccountSadder> destAccountSadders) throws CoreException;

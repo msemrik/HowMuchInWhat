@@ -12,7 +12,7 @@ public class AccountHelper {
 
     public static void saveAccount(Account account) throws CoreException, IOException {
         Detail detail = DetailMediator.getDetailByName("Initial Movement");
-        Movement movement = new Movement(account, account, (long) 0, account.getStartDate(), detail, account.getCurrency(), "Initial Movement");
+        Movement movement = new Movement(account, account, Double.valueOf(0), account.getStartDate(), detail, account.getCurrency(), Double.valueOf("1"), "Initial Movement");
         AccountMediator.saveNewAccount(account, movement);
     }
 }

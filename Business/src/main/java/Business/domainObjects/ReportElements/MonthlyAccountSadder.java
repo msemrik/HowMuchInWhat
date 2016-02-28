@@ -11,11 +11,11 @@ public class MonthlyAccountSadder {
     private int month;
     private String stringDate;
     private DateTime date;
-    private Long sadderBeforeMonth;
-    private Long sadderAfterMonth;
+    private Double sadderBeforeMonth;
+    private Double sadderAfterMonth;
     private int numberOfMovements;
 
-    public MonthlyAccountSadder(int year, int month, Long sadderBeforeMonth, Long sadderAfterMonth, int numberOfMovements) {
+    public MonthlyAccountSadder(int year, int month, Double sadderBeforeMonth, Double sadderAfterMonth, int numberOfMovements) {
         this.year = year;
         this.month = month;
         this.stringDate = String.valueOf(month)+"/"+String.valueOf(year);
@@ -57,19 +57,19 @@ public class MonthlyAccountSadder {
         this.date = date;
     }
 
-    public Long getSadderBeforeMonth() {
+    public Double getSadderBeforeMonth() {
         return sadderBeforeMonth;
     }
 
-    public void setSadderBeforeMonth(Long sadderBeforeMonth) {
+    public void setSadderBeforeMonth(Double sadderBeforeMonth) {
         this.sadderBeforeMonth = sadderBeforeMonth;
     }
 
-    public Long getSadderAfterMonth() {
+    public Double getSadderAfterMonth() {
         return sadderAfterMonth;
     }
 
-    public void setSadderAfterMonth(Long sadderAfterMonth) {
+    public void setSadderAfterMonth(Double sadderAfterMonth) {
         this.sadderAfterMonth = sadderAfterMonth;
     }
 

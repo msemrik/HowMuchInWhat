@@ -12,7 +12,7 @@ public class AccountReport {
     private Account account;
     private AccountSadderGraph accountSadderGraph;
     private AccountInformation accountInformation;
-    private Long accountSadder;
+    private Double accountSadder;
 
 
     public AccountReport(Account account) throws CoreException, IOException {
@@ -38,11 +38,11 @@ public class AccountReport {
         this.accountSadderGraph = accountSadderGraph;
     }
 
-    public Long getAccountSadder() {
+    public Double getAccountSadder() {
         return accountSadder;
     }
 
-    public void setAccountSadder(Long accountSadder) {
+    public void setAccountSadder(Double accountSadder) {
         this.accountSadder = accountSadder;
     }
 

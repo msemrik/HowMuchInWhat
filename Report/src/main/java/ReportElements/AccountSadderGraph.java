@@ -1,6 +1,7 @@
 package ReportElements;
 
 import Business.Exceptions.CoreException;
+import Business.Exceptions.ValidationException;
 import Business.ObjectMediators.AccountSadderMediator;
 import Business.domainObjects.DBObjects.Account;
 import Business.domainObjects.ReportElements.MonthlyAccountSadder;
@@ -14,26 +15,27 @@ public class AccountSadderGraph {
 
     private List<DateTime> dateList = new ArrayList<DateTime>();
     private List<String> stringDateList = new ArrayList<String>();
-    private List<Long> sadderList = new ArrayList<Long>();
+    private List<Double> sadderList = new ArrayList<Double>();
     private List<String> pointInfo = new ArrayList<String>();
 
     public AccountSadderGraph(Account account) throws CoreException, IOException {
         List<MonthlyAccountSadder> accountSaddersList = AccountSadderMediator.getAccountSadderMonthlyHistoryForAccount(account);
 
-        MonthlyAccountSadder monthlyAccountSadderElement = accountSaddersList.get(0);
-        addNewNode(monthlyAccountSadderElement);
+        if(accountSaddersList.size() > 0) {
+            MonthlyAccountSadder monthlyAccountSadderElement = accountSaddersList.get(0);
+            addNewNode(monthlyAccountSadderElement);
 
-        for (int i = 1; i < accountSaddersList.size(); i++) {
-            while (accountSaddersList.get(i).getDate().isAfter(dateList.get(dateList.size() - 1).plusMonths(1))) {
-                DateTime newDateTime = dateList.get(dateList.size() - 1).plusMonths(1);
-                Long sadder = sadderList.get(sadderList.size() -1);
-                monthlyAccountSadderElement = new MonthlyAccountSadder(newDateTime.getYear(), newDateTime.getMonthOfYear(), sadder, sadder, 0);
+            for (int i = 1; i < accountSaddersList.size(); i++) {
+                while (accountSaddersList.get(i).getDate().isAfter(dateList.get(dateList.size() - 1).plusMonths(1))) {
+                    DateTime newDateTime = dateList.get(dateList.size() - 1).plusMonths(1);
+                    Double sadder = sadderList.get(sadderList.size() - 1);
+                    monthlyAccountSadderElement = new MonthlyAccountSadder(newDateTime.getYear(), newDateTime.getMonthOfYear(), sadder, sadder, 0);
+                    addNewNode(monthlyAccountSadderElement);
+                }
+                monthlyAccountSadderElement = accountSaddersList.get(i);
                 addNewNode(monthlyAccountSadderElement);
             }
-            monthlyAccountSadderElement = accountSaddersList.get(i);
-            addNewNode(monthlyAccountSadderElement);
         }
-
     }
 
     public void addNewNode(MonthlyAccountSadder monthlyAccountSadderElement){
@@ -51,11 +53,11 @@ public class AccountSadderGraph {
         this.dateList = dateList;
     }
 
-    public List<Long> getSadderList() {
+    public List<Double> getSadderList() {
         return sadderList;
     }
 
-    public void setSadderList(List<Long> sadderList) {
+    public void setSadderList(List<Double> sadderList) {
         this.sadderList = sadderList;
     }
 

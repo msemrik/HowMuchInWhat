@@ -8,7 +8,7 @@ public class LoggingMessageConstants {
     public static String GET_OBJECT_BY_ID_SUCCESS = "Successfully Loaded %s: %s.";
     public static String GET_OBJECT_BY_ID_ERROR = "Error Loading %s, id: %d.";
 
-    public static String GET_OBJECT_BY_NAME_BEFORE = "Loading %s by Name: %d.";
+    public static String GET_OBJECT_BY_NAME_BEFORE = "Loading %s by Name: %s.";
     public static String GET_OBJECT_BY_NAME_SUCCESS = "Successfully Loaded %s: %s.";
     public static String GET_OBJECT_BY_NAME_ERROR = "Error Loading %s, Name: %d.";
 

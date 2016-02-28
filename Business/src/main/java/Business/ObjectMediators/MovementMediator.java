@@ -34,6 +34,11 @@ public class MovementMediator implements MediatorInterface {
         movementDAOInterface.deleteMovement(movement, accountSadderList);
     }
 
+    public static void deleteMovement(Movement movement, List<AccountSadder> accountSaddersToDelete, List<AccountSadder> accountOrigSadderToUpdate, List<AccountSadder> accountDestSadderToUpdate) throws CoreException, IOException {
+        MovementDAOInterface movementDAOInterface = (MovementDAOInterface) Business.getBusiness().getDbAccess().getDbManager().getDBAccessObject(Movement.class);
+        movementDAOInterface.deleteMovement(movement, accountSaddersToDelete, accountOrigSadderToUpdate, accountDestSadderToUpdate);
+    }
+
     public static void saveMovement(Movement movement, AccountSadder origAccountSadder, AccountSadder destAccountSadder) throws CoreException, IOException {
         MovementDAOInterface movementDAOInterface = (MovementDAOInterface) Business.getBusiness().getDbAccess().getDbManager().getDBAccessObject(Movement.class);
         movementDAOInterface.saveMovement(movement,origAccountSadder,destAccountSadder);

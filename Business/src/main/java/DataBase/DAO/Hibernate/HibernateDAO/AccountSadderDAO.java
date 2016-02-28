@@ -65,7 +65,7 @@ public class AccountSadderDAO implements AccountSadderDAOInterface, AbstractDAOI
     }
 
     @Override
-    public Long getAccountSadderForAccount(Account account) throws CoreException {
+    public Double getAccountSadderForAccount(Account account) throws CoreException {
         logger.info("Loading AccountSadder for Account: " + account);
         Session session = dbManager.getSession();
         try {
@@ -77,7 +77,7 @@ public class AccountSadderDAO implements AccountSadderDAOInterface, AbstractDAOI
 
             if (accountSadderList.size() < 1) {
                 logger.info("No Sadder for Account: " + account.toPrint());
-                return Long.valueOf(0);
+                return Double.valueOf(0);
             }
             logger.info("Successfully Loaded AccountSadder for Account: " + account.toPrint() + ". Row Count; " + accountSadderList.size());
             return accountSadderList.get(0).getSadderAfterMovement();
@@ -92,7 +92,7 @@ public class AccountSadderDAO implements AccountSadderDAOInterface, AbstractDAOI
 
 
     @Override
-    public long getAccountSadderForAccountByDate(Account account, Date date) throws CoreException {
+    public Double getAccountSadderForAccountByDate(Account account, Date date) throws CoreException {
         logger.info("Loading AccountSadder value for Account: " + account + ", For Date: " + date);
         Session session = dbManager.getSession();
         try {
@@ -105,7 +105,7 @@ public class AccountSadderDAO implements AccountSadderDAOInterface, AbstractDAOI
 
             if (accountSadderList.size() < 1) {
                 logger.error("Initial movement for Account: " + account.toPrint() + ", was after requested: " + date);
-                return Long.parseLong(null);
+                return Double.parseDouble(null);
             }
             logger.info("Successfully Loaded AccountSadder value for Account: " + account.toPrint() + ", for Date: " + date + ". Row Count: " + accountSadderList.size());
             return accountSadderList.get(0).getSadderAfterMovement();
@@ -137,7 +137,7 @@ public class AccountSadderDAO implements AccountSadderDAOInterface, AbstractDAOI
             List<MonthlyAccountSadder> monthlyAccountSadders = new ArrayList<MonthlyAccountSadder>();
             for (Object accountSadder : accountSadderList) {
                 Object[] object = (Object[]) accountSadder;
-                MonthlyAccountSadder monthlyAccountSadder = new MonthlyAccountSadder((Integer) object[0], (Integer) object[1], ((BigInteger) object[2]).longValue(), ((BigInteger) object[3]).longValue(), ((BigInteger) object[4]).intValue());
+                MonthlyAccountSadder monthlyAccountSadder = new MonthlyAccountSadder((Integer) object[0], (Integer) object[1], ((Double) object[2]), ((Double) object[3]), ((BigInteger) object[4]).intValue());
                 monthlyAccountSadders.add(monthlyAccountSadder);
             }
 

@@ -1,6 +1,7 @@
 package Business.domainObjects.DBObjects;
 
 import Business.Exceptions.CoreException;
+import Business.Helpers.CurrencyHelper;
 import Business.ObjectMediators.AccountSadderMediator;
 import Business.domainObjects.MovementStatus;
 
@@ -22,15 +23,15 @@ public class AccountSadder/* implements DBObject */{
     @ManyToOne
     private Account account;
 
-    private Long sadderBeforeMovement;
-    private Long sadderAfterMovement;
+    private Double sadderBeforeMovement;
+    private Double sadderAfterMovement;
 
     private MovementStatus movementStatus;
 
     public AccountSadder() {
     }
 
-    public AccountSadder(Movement movement, Account account, Long sadderBeforeMovement, Long sadderAfterMovement, MovementStatus movementStatus) {
+    public AccountSadder(Movement movement, Account account, Double sadderBeforeMovement, Double sadderAfterMovement, MovementStatus movementStatus) {
         this.movement = movement;
         this.account = account;
         this.sadderBeforeMovement = sadderBeforeMovement;
@@ -43,7 +44,6 @@ public class AccountSadder/* implements DBObject */{
 
         this.movement = movement;
         this.account = account;
-
         this.sadderBeforeMovement = AccountSadderMediator.getAccountSadderForAccount(account);
 
         int signChanger = 1;
@@ -54,7 +54,8 @@ public class AccountSadder/* implements DBObject */{
         if(movement.getStatus()== MovementStatus.REVERTED)
             signChanger = signChanger * -1;
 
-        this.sadderAfterMovement = this.sadderBeforeMovement + (movement.getAmount() * signChanger);
+        Double amount = (movement.getCurrency().getId() == account.getCurrency().getId()) ? movement.getAmount() : (movement.getAmount() * movement.getCurrencyCotization());
+        this.sadderAfterMovement = this.sadderBeforeMovement + ( amount * signChanger);
 
         this.movementStatus = movement.getStatus();
 
@@ -84,19 +85,19 @@ public class AccountSadder/* implements DBObject */{
         this.account = account;
     }
 
-    public Long getSadderBeforeMovement() {
+    public Double getSadderBeforeMovement() {
         return sadderBeforeMovement;
     }
 
-    public void setSadderBeforeMovement(Long sadderBeforeMovement) {
+    public void setSadderBeforeMovement(Double sadderBeforeMovement) {
         this.sadderBeforeMovement = sadderBeforeMovement;
     }
 
-    public Long getSadderAfterMovement() {
+    public Double getSadderAfterMovement() {
         return sadderAfterMovement;
     }
 
-    public void setSadderAfterMovement(Long sadderAfterMovement) {
+    public void setSadderAfterMovement(Double sadderAfterMovement) {
         this.sadderAfterMovement = sadderAfterMovement;
     }
 

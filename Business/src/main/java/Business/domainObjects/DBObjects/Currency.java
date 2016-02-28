@@ -13,7 +13,6 @@ public class Currency implements DBObject {
 
     private String name;
     private String symbol;
-    private long price;
 
     public Currency() {
     }
@@ -21,7 +20,6 @@ public class Currency implements DBObject {
     public Currency(String name, String symbol, long price) {
         this.name = name;
         this.symbol = symbol;
-        this.price = price;
     }
 
     @Override
@@ -49,14 +47,6 @@ public class Currency implements DBObject {
         this.symbol = symbol;
     }
 
-    public long getPrice() {
-        return price;
-    }
-
-    public void setPrice(long price) {
-        this.price = price;
-    }
-
     public String toPrint(){
         return  symbol + "(id: " + id + ") ";
     }
@@ -67,7 +57,6 @@ public class Currency implements DBObject {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", symbol='" + symbol + '\'' +
-                ", price=" + price +
                 '}';
     }
 }

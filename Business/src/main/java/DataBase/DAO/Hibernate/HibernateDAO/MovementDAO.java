@@ -105,6 +105,35 @@ public class MovementDAO implements MovementDAOInterface, AbstractDAOInterface {
         }
     }
 
+    @Override
+    public void deleteMovement(Movement movement, List<AccountSadder> accountSaddersToDelete, List<AccountSadder> accountOrigSadderToUpdate, List<AccountSadder> accountDestSadderToUpdate) throws CoreException{
+        logger.info("Deleting Middle Movement: " + movement.toPrint());
+        Session session = dbManager.getSession();
+        try {
+            session.getTransaction().begin();
+            for (AccountSadder accountSadder : accountSaddersToDelete) {
+                session.delete(accountSadder);
+            }
+            for (AccountSadder accountSadder : accountOrigSadderToUpdate) {
+                session.save(session.merge(accountSadder));
+            }
+            for (AccountSadder accountSadder : accountDestSadderToUpdate) {
+                session.save(session.merge(accountSadder));
+            }
+            session.delete(movement);
+            session.getTransaction().commit();
+            logger.info("Successfully Deleted Middle Movement: " + movement.toPrint() + ". AccountSadder Updated: " + accountOrigSadderToUpdate.size());
+        } catch (Exception e) {
+            String error = "Error Deleting Movement: " + movement.toPrint();
+            logger.error(error);
+            throw new DBAccessException(error, e);
+        } finally {
+            dbManager.closeSession(session);
+        }
+
+    }
+
+
 
     @Override
     public void saveMovement(Movement movement, AccountSadder origAccountSadder, AccountSadder destAccountSadder) throws CoreException {

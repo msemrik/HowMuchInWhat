@@ -25,15 +25,15 @@ public class AccountSadderMediator implements MediatorInterface {
         return accountSadderList;
     }
 
-    public static Long getAccountSadderForAccount(Account account) throws CoreException, IOException {
+    public static Double getAccountSadderForAccount(Account account) throws CoreException, IOException {
         AccountSadderDAOInterface accountSaderDAOInterface = (AccountSadderDAOInterface) Business.getBusiness().getDbAccess().getDbManager().getDBAccessObject(AccountSadder.class);
-        Long accountSadder = accountSaderDAOInterface.getAccountSadderForAccount(account);
+        Double accountSadder = accountSaderDAOInterface.getAccountSadderForAccount(account);
         return accountSadder;
     }
 
-    public static long getAccountSadderForAccountByDate(Account account, Date date) throws CoreException, IOException {
+    public static Double getAccountSadderForAccountByDate(Account account, Date date) throws CoreException, IOException {
         AccountSadderDAOInterface accountSadderDAOInterface = (AccountSadderDAOInterface) Business.getBusiness().getDbAccess().getDbManager().getDBAccessObject(AccountSadder.class);
-        long accountSadder = accountSadderDAOInterface.getAccountSadderForAccountByDate(account, date);
+        Double accountSadder = accountSadderDAOInterface.getAccountSadderForAccountByDate(account, date);
         return accountSadder;
     }
 

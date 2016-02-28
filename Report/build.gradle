@@ -32,10 +32,3 @@ dependencies {
     compile('org.apache.logging.log4j:log4j-core:2.5')
     compile project(':Business')
 }
-
-task copyToLib(type: Copy) {
-    into "$buildDir/libs"
-    from configurations.runtime
-}
-copyToLib.dependsOn(build)
-

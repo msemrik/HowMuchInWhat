@@ -21,7 +21,7 @@ public class Account implements DBObject {
     private Date endDate;
 
     @Transient
-    private long accountSadder;
+    private Double accountSadder;
 
     @Transient
     private String typeOfAccount;
@@ -79,11 +79,11 @@ public class Account implements DBObject {
         this.name = name;
     }
 
-    public long getAccountSadder() {
+    public Double getAccountSadder() {
         return accountSadder;
     }
 
-    public void setAccountSadder(long accountSadder) {
+    public void setAccountSadder(Double accountSadder) {
         this.accountSadder = accountSadder;
     }
 

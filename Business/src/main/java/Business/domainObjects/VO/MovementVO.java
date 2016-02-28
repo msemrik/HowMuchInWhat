@@ -1,14 +1,16 @@
 package Business.domainObjects.VO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 public class MovementVO {
 
     private String origAccount;
     private String destAccount;
-    private Long amount;
+    private Double amount;
     private String currency;
+    private Double currencyCotization;
     private Date movementDate;
     @JsonProperty
     private boolean isActualDate;
@@ -18,11 +20,12 @@ public class MovementVO {
     public MovementVO() {
     }
 
-    public MovementVO(String origAccount, String destAccount, Long amount, String currency, Date movementDate, String detail, String comment) {
+    public MovementVO(String origAccount, String destAccount, Double amount, String currency, Double currencyCotization, Date movementDate, String detail, String comment) {
         this.origAccount = origAccount;
         this.destAccount = destAccount;
         this.amount = amount;
         this.currency = currency;
+        this.currencyCotization = currencyCotization;
         this.movementDate = movementDate;
         this.detail = detail;
         this.comment = comment;
@@ -44,11 +47,11 @@ public class MovementVO {
         this.destAccount = destAccount;
     }
 
-    public Long getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
@@ -92,17 +95,30 @@ public class MovementVO {
         isActualDate = actualDate;
     }
 
+    public Double getCurrencyCotization() {
+        return currencyCotization;
+    }
+
+    public void setCurrencyCotization(Double currencyCotization) {
+        this.currencyCotization = currencyCotization;
+    }
 
     @Override
     public String toString() {
-        return "MovementVO{" +
+        String returnString = "MovementVO{" +
                 "origAccount='" + origAccount + '\'' +
                 ", destAccount='" + destAccount + '\'' +
                 ", amount=" + amount +
-                ", currency='" + currency + '\'' +
-                ", movementDate=" + movementDate +
+                ", currency='" + currency + '\'';
+
+        if (currencyCotization != null)
+            returnString = returnString + ", currencyCotization='" + currencyCotization + '\'';
+
+        returnString = returnString + ", movementDate=" + movementDate +
                 ", detail='" + detail + '\'' +
                 ", comment='" + comment + '\'' +
                 '}';
+
+        return returnString;
     }
 }

@@ -26,7 +26,6 @@ dependencies {
     compile('org.hibernate.common:hibernate-commons-annotations:4.0.1.Final')
     compile('org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final')
     compile('org.hibernate:hibernate-entitymanager:4.0.1.Final')
-    //compile('com.oracle:ojdbc6:11.2.0.2.0')
     compile('mysql:mysql-connector-java:5.1.9')
     compile('org.json:json:20090211')
     compile('com.fasterxml.jackson.core:jackson-annotations:2.6.3')

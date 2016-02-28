@@ -15,13 +15,13 @@ public class MovementRow {
     Date movementDate;
 
     Account origAccount;
-    Long origSadder;
+    Double origSadder;
 
     Account destAccount;
-    Long destSadder;
+    Double destSadder;
 
     Currency currency;
-    Long amount;
+    Double amount;
 
     Detail detail;
 
@@ -51,11 +51,11 @@ public class MovementRow {
         this.origAccount = origAccount;
     }
 
-    public Long getOrigSadder() {
+    public Double getOrigSadder() {
         return origSadder;
     }
 
-    public void setOrigSadder(Long origSadder) {
+    public void setOrigSadder(Double origSadder) {
         this.origSadder = origSadder;
     }
 
@@ -67,19 +67,19 @@ public class MovementRow {
         this.destAccount = destAccount;
     }
 
-    public Long getDestSadder() {
+    public Double getDestSadder() {
         return destSadder;
     }
 
-    public void setDestSadder(Long destSadder) {
+    public void setDestSadder(Double destSadder) {
         this.destSadder = destSadder;
     }
 
-    public Long getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
